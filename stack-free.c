@@ -3,16 +3,16 @@
 * stack_free - frees a doubly linked list
 * @stacky: head of the stack
 */
-void stack_free(stack_t *stack)
+void stack_free(stack_t *stacky)
 {
 stack_t *temp;
 
-temp = stack;
+temp = stacky;
 
-while (stack)
+while (stacky)
 {
-temp = stack->next;
-free(stack);
-stack = temp;
+temp = stacky->next;
+free(stacky);
+stacky = temp;
 }
 }

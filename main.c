@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
 char value[1024];
 FILE *file;
 size_t size = sizeof(value);
-stack_t *stack = NULL;
+stack_t *stacky = NULL;
 unsigned int line_number = 0;
 
 if (argc != 2)
@@ -33,9 +33,9 @@ while (fgets(value, size, file) != NULL)
 {
 stack_second.value = value;
 line_number++;
-execute(value, &stack, line_number, file);
+execute(value, &stacky, line_number, file);
 }
-stack_free(stack);
+stack_free(stacky);
 fclose(file);
 return (0);
 }

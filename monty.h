@@ -50,7 +50,7 @@ extern stack_second_t stack_second;
 void process_instructions(FILE *file);
 void execute_instruction(char *opcode, unsigned int line_number);
 
-void stack_free(stack_t *stack);
+void stack_free(stack_t *stacky);
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
 int main(int argc, char *argv[]);
