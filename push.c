@@ -1,93 +1,61 @@
 #include "monty.h"
+
 /**
- * is_valid_interger - checks if the string is a valid integer
- * @str: string to check
- * Return: 1 if valid integer, 0 otherwise
+ * is_integer - checks if a string represents a valid integer
+ * @str: the string to check
+ * Return: 1 if the string is a valid integer, 0 otherwise
  */
-int is_valid_interger(char *str)
+int is_integer(const char *str)
 {
-int i = 0;
+if (*str == '-' || *str == '+')
+str++;
 
-if (str[0] == '-')
-{
-i++;
-}
-
-for (; str[i] != '\0'; i++)
-{
-if (str[i] < '0' || str[i] > '9')
-{
+if (*str == '\0')
 return (0);
+
+while (*str)
+{
+if (*str < '0' || *str > '9')
+return (0);
+str++;
 }
-}
+
 return (1);
 }
+
 /**
- * convert_to_int - converts string to integer
- * @str: string to convert
- * Return: converted integer
+ * exit_program - Helper function
+ * to free stack and exit program
+ * @stack: taken in
  */
-int convert_to_int(char *str)
+void exit_program(stack_t **stack)
 {
-int result = 0;
-int sign = 1;
-int i = 0;
-
-if (str[0] == '-')
-{
-sign = -1;
-i++;
-}
-
-for (; str[i] != '\0'; i++)
-{
-result = result * 10 + (str[i] - '0');
-}
-
-return (result *sign);
+fclose(stack_second.file);
+free(stack_second.value);
+stack_free(*stack);
+exit(EXIT_FAILURE);
 }
 
 /**
- * push_error - handles the error condition for push
+ * push - add node to the stack
+ * @stack: stack head
  * @line_number: line_number
  * Return: no return
  */
-void push_error(unsigned int line_number)
-{
-fprintf(stderr, "L%d: usage: push integer\n", line_number);
-fclose(stack_second.file);
-free(stack_second.value);
-/*stack_free(*stacky);*/
-exit(EXIT_FAILURE);
-}
-/**
- * push - Pushes an element to the stack.
- * @stack: Double pointer to the stack (linked list).
- * @line_number: Line number in the file.
- */
 void push(stack_t **stack, unsigned int line_number)
 {
-if (stack_second.arg)
+int n;
+char *error_message = "L%d: usage: push integer\n";
+
+if (stack_second.arg == NULL || !is_integer(stack_second.arg))
 {
-if (is_valid_interger(stack_second.arg))
-{
-int result = convert_to_int(stack_second.arg);
+fprintf(stderr, error_message, line_number);
+exit_program(stack);
+}
+
+n = atoi(stack_second.arg);
 if (stack_second.sight == 0)
-{
-addnode(stack, result);
-}
+addnode(stack, n);
 else
-{
-addqueue(stack, result);
-}
-}
-else
-{
-push_error(line_number);
-}
-}
-else
-{
-push_error(line_number);
-}
+addqueue(stack, n);
 }
