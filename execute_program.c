@@ -1,7 +1,5 @@
 #include "monty.h"
-
 stack_second_t stack_second = {NULL, NULL, NULL, 0};
-
 /**
 * execute - executes the opcode
 * @stack: head linked list - stack

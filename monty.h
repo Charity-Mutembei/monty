@@ -46,7 +46,6 @@ typedef struct stack_second_ts
 
 /* Global variable: stack (linked list) */
 extern stack_second_t stack_second;
-
 /* Function prototypes */
 void process_instructions(FILE *file);
 void execute_instruction(char *opcode, unsigned int line_number);
