@@ -17,6 +17,7 @@ instruction_t opst[] = {
 {"pop", pop},
 {"swap", swap},
 {"add", add},
+{"nope", nop},
 
 {NULL, NULL}
 };
