@@ -36,12 +36,29 @@ typedef struct instruction_s
     void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-/* Function prototypes */
-void process_instructions(FILE *file, stack_t **stack);
-void execute(char *opcode, unsigned int line_number, stack_t **stack);
+typedef struct stack_second_ts
+{
+    char *arg;
+    char *value;
+    FILE *file;
+    int sight;
+} stack_second_t;
 
+/* Global variable: stack (linked list) */
+extern stack_second_t stack_second;
+
+/* Function prototypes */
+void process_instructions(FILE *file);
+void execute_instruction(char *opcode, unsigned int line_number);
+
+void stack_free(stack_t *stacky);
 void push(stack_t **stack, unsigned int line_number);
-void pall(stack_t **stack);
+void pall(stack_t **stack, unsigned int line_number);
 int main(int argc, char *argv[]);
+int execute(char *value, stack_t **stack, unsigned int line_number, FILE *file);
+void addnode(stack_t **stack, int n);
+void queue(stack_t **stack, unsigned int line_number);
+void addqueue(stack_t **stack, int n);
+
 
 #endif

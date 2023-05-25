@@ -1,37 +1,93 @@
 #include "monty.h"
 /**
+ * is_valid_interger - checks if the string is a valid integer
+ * @str: string to check
+ * Return: 1 if valid integer, 0 otherwise
+ */
+int is_valid_interger(char *str)
+{
+int i = 0;
+
+if (str[0] == '-')
+{
+i++;
+}
+
+for (; str[i] != '\0'; i++)
+{
+if (str[i] < '0' || str[i] > '9')
+{
+return (0);
+}
+}
+return (1);
+}
+/**
+ * convert_to_int - converts string to integer
+ * @str: string to convert
+ * Return: converted integer
+ */
+int convert_to_int(char *str)
+{
+int result = 0;
+int sign = 1;
+int i = 0;
+
+if (str[0] == '-')
+{
+sign = -1;
+i++;
+}
+
+for (; str[i] != '\0'; i++)
+{
+result = result * 10 + (str[i] - '0');
+}
+
+return (result *sign);
+}
+
+/**
+ * push_error - handles the error condition for push
+ * @line_number: line_number
+ * Return: no return
+ */
+void push_error(unsigned int line_number)
+{
+fprintf(stderr, "L%d: usage: push integer\n", line_number);
+fclose(stack_second.file);
+free(stack_second.value);
+/*stack_free(*stacky);*/
+exit(EXIT_FAILURE);
+}
+/**
  * push - Pushes an element to the stack.
  * @stack: Double pointer to the stack (linked list).
  * @line_number: Line number in the file.
  */
 void push(stack_t **stack, unsigned int line_number)
 {
-char *arg = strtok(NULL, " \n\t\r");
-int value;
-stack_t *new_node;
-
-if (arg == NULL || !isdigit(arg[0]))
+if (stack_second.arg)
 {
-printf("L%u: usage: push integer\n", line_number);
-exit(EXIT_FAILURE);
-}
-
-value = atoi(arg);
-
-new_node = malloc(sizeof(stack_t));
-if (new_node == NULL)
+if (is_valid_interger(stack_second.arg))
 {
-printf("Error: malloc failed\n");
-exit(EXIT_FAILURE);
+int result = convert_to_int(stack_second.arg);
+if (stack_second.sight == 0)
+{
+addnode(stack, result);
 }
-
-new_node->n = value;
-new_node->prev = NULL;
-new_node->next = *stack;
-
-if (*stack != NULL)
-(*stack)->prev = new_node;
-
-*stack = new_node;
+else
+{
+addqueue(stack, result);
 }
-
+}
+else
+{
+push_error(line_number);
+}
+}
+else
+{
+push_error(line_number);
+}
+}
