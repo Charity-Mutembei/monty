@@ -35,7 +35,7 @@ if (op && opst[i].opcode == NULL)
 { fprintf(stderr, "L%d: unknown instruction %s\n", line_number, op);
 fclose(file);
 free(value);
-stack_free(*stack);
+/*stack_free(*stacky);*/
 exit(EXIT_FAILURE); }
 return (1);
 }
