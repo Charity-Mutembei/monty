@@ -11,7 +11,11 @@ stack_second_t stack_second = {NULL, NULL, NULL, 0};
 int execute(char *value, stack_t **stack, unsigned int line_number, FILE *file)
 {
 instruction_t opst[] = {
-{"push", push}, {"pall", pall}, {"pint", pint},
+{"push", push},
+{"pall", pall},
+{"pint", pint},
+{"pop", pop},
+
 {NULL, NULL}
 };
 unsigned int i = 0;
