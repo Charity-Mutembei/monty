@@ -13,7 +13,7 @@ stack_second_t stack_second = {NULL, NULL, NULL, 0};
 int execute(char *value, stack_t **stack, unsigned int line_number, FILE *file)
 {
 instruction_t opst[] = {
-{"push", push}, {"pall", pall},
+{"push", push}, {"pall", pall}, {"pint", pint},
 {NULL, NULL}
 };
 unsigned int i = 0;
@@ -35,7 +35,7 @@ if (op && opst[i].opcode == NULL)
 { fprintf(stderr, "L%d: unknown instruction %s\n", line_number, op);
 fclose(file);
 free(value);
-/*stack_free(*stacky);*/
+stack_free(*stack);
 exit(EXIT_FAILURE); }
 return (1);
 }

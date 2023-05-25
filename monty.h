@@ -59,6 +59,7 @@ int execute(char *value, stack_t **stack, unsigned int line_number, FILE *file);
 void addnode(stack_t **stack, int n);
 void queue(stack_t **stack, unsigned int line_number);
 void addqueue(stack_t **stack, int n);
+void pint(stack_t **stack, unsigned int line_number);
 
 
 #endif
