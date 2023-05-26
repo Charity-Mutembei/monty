@@ -24,6 +24,7 @@ instruction_t opst[] = {
 {"mod", f_mod},
 {"pchar", f_pchar},
 {"pstr", f_pstr},
+{"rotl", rotl},
 
 {NULL, NULL}
 };
