@@ -21,6 +21,7 @@ instruction_t opst[] = {
 {"sub", sub},
 {"div", f_div},
 {"mul", f_mul},
+{"mod", f_mod},
 
 {NULL, NULL}
 };
