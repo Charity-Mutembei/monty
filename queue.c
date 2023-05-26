@@ -9,6 +9,7 @@ void f_stack(stack_t **stack, unsigned int line_number)
 {
 (void)stack;
 (void)line_number;
+stack_second.sight = 0;
 /* No action required as stack is the default behavior */
 }
 
